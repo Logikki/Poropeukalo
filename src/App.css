@@ -8,3 +8,21 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.navList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: grey;
+}
+
+.navItem {
+  float: left;
+  padding-left: 5em;
+ padding-right: 10em;
+}
+
+.cards__container {
+  text-align: center;
+}

@@ -13,8 +13,8 @@ const Cards = () => {
       
     return (
         <div className='cards'>
-          <h1 className="kortit__otsikko">Mökki luoston ytimessä</h1>
           <div className='cards__container'>
+          <h1 className="kortit__otsikko">Mökki luoston ytimessä</h1>
             <div className='cards__wrapper'>
               <ul className='cards__items'>
                 <Card
