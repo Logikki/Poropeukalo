@@ -6,5 +6,7 @@ Content-Type: application/json
     "number": "0405144221",
     "guests": 3,
     "startDate": "1 nov",
-    "endDate": "2 nov"
-}
+    "endDate": "2 nov",
+    "email": "roni@email.com",
+    "lisatietoja": "asdasd"
+    }

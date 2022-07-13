@@ -11,9 +11,24 @@ const rentSchema = new mongoose.Schema({
     minlength: 8,
     required: true,
   },
-  guests: Number,
-  startDate: Date,
-  endDate: Date,
+  guests: {
+    type: Number,
+    required: true 
+  },
+
+  startDate: {
+    type: Date,
+    required: true
+  },
+  endDate: {
+    type: Date,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  lisatietoja: String
 })
 
 rentSchema.set('toJSON', {

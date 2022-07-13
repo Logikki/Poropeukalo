@@ -10,6 +10,8 @@ rentsRouter.post('/', async (req, res) => {
     guests: body.guests,
     startDate: body.startDate,
     endDate: body.endDate,
+    email: body.email,
+    lisatietoja: body.lisatietoja
   })
 
   const savedRent = await rentinf.save()
