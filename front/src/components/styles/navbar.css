@@ -1,0 +1,19 @@
+.navList {
+    list-style-type: none;
+    margin: 0;
+    margin-bottom: 0.5em;
+    padding: 0;
+    padding-bottom: 1em;
+    overflow: hidden;
+    background-color: lightblue;
+  }
+  
+  .navbarWrap {
+    text-align: center;
+  }
+  
+  .navItem {
+    float: left;
+    padding-left: 3em;
+   text-align: center;
+  }
