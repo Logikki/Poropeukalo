@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/rents 
+Content-Type: application/json
+
+{
+    "name": "Roni Koskinen",
+    "number": "0405144221",
+    "guests": 3,
+    "startDate": "1 nov",
+    "endDate": "2 nov"
+}
