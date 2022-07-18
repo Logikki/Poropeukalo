@@ -1,10 +1,13 @@
+/* eslint-disable indent */
 import CalendarMy from '../CalendarMy'
 import { useState } from 'react'
 import '../styles/varaaSivu.css'
 import rent from '../../services/rent'
 import Message from '../Message'
+import Select from 'react-select'
 
 const VaraaSivu = () => {
+
   const [Name, setName] = useState('')
   const [Address, setAddress] = useState('')
   const [Number, setNumber] = useState('')
@@ -13,7 +16,7 @@ const VaraaSivu = () => {
   const [lisatieto, setLisatieto] = useState('')
   const [guests, setGuests] = useState(0)
   const [varatutPaivat, setVaratutPaivat] = useState([])
-  const [message, setMessage] = useState('')
+  const [emessage, setMessage] = useState('')
 
   const handleNameChange = (event) => {
     setName(event.target.value)
@@ -39,24 +42,44 @@ const VaraaSivu = () => {
     e.preventDefault()
 
     const varausObj = {
-      name: { Name },
-      number: { Number },
-      address: { Address },
-      email: { email },
-      lisatieto: { lisatieto },
-      guests: { guests }
+      name: Name,
+      number: Number,
+      address: Address,
+      email: email,
+      lisatieto: lisatieto,
+      guests: guests,
+      startDate: date[0],
+      endDate: date[1],
     }
+
     rent.
       create(varausObj)
       .then(savedRent => {
         setVaratutPaivat(varatutPaivat.concat(savedRent))
-      })
-    setMessage('Varaus vastaanotettu!. Sähköpostissa varausvahvistus.')
+        setMessage('Varaus vastaanotettu!. Sähköpostissa varausvahvistus.')
+        console.log('varaus tehty')
     setTimeout(() => {
       setMessage(null)
-    }, 5000)
-  }
+    }, 150000)
+      })
+      .catch(error => {
+        console.log(error.response.data)
+        setMessage(JSON.stringify(error.response.data.error))
+      setTimeout(() => {
+        setMessage(null)
+      },10000)
+    })
 
+
+  }
+  const options = [
+              { value: 1, label: '1' },
+              { value: 2, label: '2' },
+              { value: 3, label: '3' },
+              { value: 4, label: '4' },
+              { value: 5, label: '5' },
+              { value: 6, label: '6' }
+  ]
 
   return (
     <div className='varaasivu'>
@@ -84,31 +107,32 @@ const VaraaSivu = () => {
           </div>
           <div>
             <label> Majoittuvien henkilöiden määrä:</label>
-            <select name='guests' id='guests' onChange={(choice) => setGuests(parseInt(choice))}>
-              <option value='1'>1</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-              <option value='4'>4</option>
-              <option value='5'>5</option>
-              <option value='6'>6</option>
-            </select>
+            <Select
+            className='react-select'
+            isClearable={false}
+            name='guests'
+            id='guests'
+            options={options}
+            onChange={(choice) => setGuests(parseInt(choice.value) || console.log(choice))}>
+            </Select>
           </div>
-          <div>
-            <label>Lisätietoja : </label>
+          <div className='lisatieto-wrapper'>
+            <p className='lisatieto-header'>Lisätietoja:</p>
             <textarea
               value={lisatieto}
+              className='lisatieto-kentta'
               onChange={handleTietoChange}
               rows={5}
               cols={5}
             />
           </div>
-        </form>
-      </div>
-      <CalendarMy date={date} setDate={setDate} />
-      <div>
+          <div>
         <button type='submit'>Vahvista varaus</button>
       </div>
-      <Message message={message} />
+        </form>
+      </div>
+      <Message message={emessage} />
+      <CalendarMy date={date} setDate={setDate} />
     </div>
   )
 }

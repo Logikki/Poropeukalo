@@ -108,7 +108,7 @@
     background: none;
   }
   .react-calendar__tile:disabled {
-    background-color: #f0f0f0;
+    background-color: #e91313;
   }
   .react-calendar__tile:enabled:hover,
   .react-calendar__tile:enabled:focus {
@@ -140,3 +140,21 @@
   .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #e6e6e6;
   }
+
+.react-select {
+  max-width: 10em;
+}
+
+.lisatieto-kentta {
+  min-width: 20em;
+}
+
+.lisatieto-wrapper {
+  display: list-item ;
+}
+
+.lisatieto-header {
+  padding: 0;
+  margin-bottom: 0;
+  margin-top: 1em;
+}

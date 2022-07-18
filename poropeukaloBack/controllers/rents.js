@@ -25,4 +25,9 @@ rentsRouter.get('/', async (req,res) => {
   res.json(rents)
 })
 
+rentsRouter.delete('/', async (req,res) => {
+  await Rent.deleteMany({})
+  res.status(204).end()
+})
+
 module.exports = rentsRouter
