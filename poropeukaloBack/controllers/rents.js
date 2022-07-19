@@ -26,7 +26,7 @@ rentsRouter.get('/', async (req,res) => {
 })
 
 rentsRouter.delete('/', async (req,res) => {
-  await Rent.deleteMany({})
+  await Rent.deleteMany({}) //POISTAA KAIKEN DATAN PALVELIMELTA
   res.status(204).end()
 })
 

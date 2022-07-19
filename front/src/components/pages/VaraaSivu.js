@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable indent */
 import CalendarMy from '../CalendarMy'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import '../styles/varaaSivu.css'
 import rent from '../../services/rent'
 import Message from '../Message'
@@ -15,8 +16,9 @@ const VaraaSivu = () => {
   const [email, setEmail] = useState('')
   const [lisatieto, setLisatieto] = useState('')
   const [guests, setGuests] = useState(0)
-  const [varatutPaivat, setVaratutPaivat] = useState([])
+  const [bookedDates, setBookedDates] = useState([])
   const [emessage, setMessage] = useState('')
+
 
   const handleNameChange = (event) => {
     setName(event.target.value)
@@ -38,6 +40,32 @@ const VaraaSivu = () => {
     setAddress(event.target.value)
   }
 
+  useEffect(() => {
+
+    function getDates(startDate, endDate) {
+      const start = new Date(new Date(startDate).setUTCHours(0, 0, 0, 0))
+      const end = new Date(new Date(endDate).setUTCHours(0, 0, 0, 0))
+
+   const date = new Date(start.getTime())
+
+   const dates = []
+
+   while (date <= end) {
+    dates.push(new Date(date))
+    date.setDate(date.getDate() + 1)
+   }
+
+   return dates
+  }
+    const data = rent.getAll()
+      .then(res => {
+        const booked = res.map(booking => [booking.startDate, booking.endDate])
+        const kaikkiPaivat = booked.map(staend => getDates(staend[0], staend[1]))
+        setBookedDates([].concat.apply([], kaikkiPaivat))
+      })
+      console.log(`valmis lista: ${bookedDates}`)
+  }, [])
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -55,7 +83,7 @@ const VaraaSivu = () => {
     rent.
       create(varausObj)
       .then(savedRent => {
-        setVaratutPaivat(varatutPaivat.concat(savedRent))
+        setBookedDates(bookedDates.concat(savedRent))
         setMessage('Varaus vastaanotettu!. Sähköpostissa varausvahvistus.')
         console.log('varaus tehty')
     setTimeout(() => {
@@ -132,7 +160,7 @@ const VaraaSivu = () => {
         </form>
       </div>
       <Message message={emessage} />
-      <CalendarMy date={date} setDate={setDate} />
+      <CalendarMy date={date} setDate={setDate} disabledDates={bookedDates} />
     </div>
   )
 }
