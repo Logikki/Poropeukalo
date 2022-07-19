@@ -8,6 +8,7 @@ const config = require('./utils/config')
 app.use(cors())
 app.use(express.json())
 app.use('/api/rents', rentsRouter)
+app.use(express.static('build'))
 
 mongoose.connect(config.MONGODB_URI)
 
