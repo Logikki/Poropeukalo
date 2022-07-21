@@ -5,8 +5,9 @@ Content-Type: application/json
     "name": "Roni Koskinen",
     "number": "0405144221",
     "guests": 3,
+    "address": "pappilantie",
     "startDate": "1 nov",
     "endDate": "2 nov",
-    "email": "roni@email.com",
-    "lisatietoja": "asdasd"
+    "email": "roni.koskinen@gmail.com",
+    "lisatieto": "asdasd"
     }
