@@ -1,8 +1,9 @@
 import Cards from '../Cards'
+import '../styles/home.css'
 
 const Home = () => {
   return (
-    <div>
+    <div className='home'>
       <Cards />
     </div>
   )

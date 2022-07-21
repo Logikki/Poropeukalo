@@ -1,0 +1,37 @@
+.mokkikuva {
+    width: 600px;
+    height: 800px;
+    border-radius: 25px;
+    background-color: rgba(30, 220, 106, 0.632);
+    padding: 0.5em;
+    padding-right: .7em;
+    padding-left: .7em;
+    margin: 0.5em;
+}
+.cards__container {
+    
+    text-align: center;
+    align-content: center;
+}
+
+
+.cards__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.kuva_item {
+    padding: 0.2em;
+    
+}
+
+@media all and (max-width: 800px) {
+  .cards__wrapper {
+    flex-direction: column;
+  }
+}
+.cards {
+    background-color: white;
+    align-content: center;
+}

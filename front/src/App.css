@@ -1,19 +1,9 @@
 
-.mokkikuva {
-    width: 600px;
-    height: 800px;
-}
-.cards__container {
-    display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
+  @font-face {
+    font-family: 'Alternates';
+    src: url('./components/styles/montserrat/Montserrat-VariableFont_wght.ttf');
+  }
 
-.cards__container {
-  text-align: center;
-
-}
-
-.cards__wrapper {
-  display: flex;
+* {
+  font-family: 'Alternates';
 }

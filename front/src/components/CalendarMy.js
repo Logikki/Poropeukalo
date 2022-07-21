@@ -1,8 +1,7 @@
 import Calendar from 'react-calendar'
 
 const CalendarMy = ({ date, setDate, disabledDates }) => {
-  console.log(date)
-  console.log(disabledDates)
+  console.log(date[0]) //näkyy oikein
   return (
     <div>
       <div className="calendar_wrapper">

@@ -1,3 +1,5 @@
+import './styles/error.css'
+
 const Message = ({ message }) => {
   if (message === null) {
     return null

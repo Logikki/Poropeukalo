@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable indent */
 import CalendarMy from '../CalendarMy'
 import { useState, useEffect } from 'react'
 import '../styles/varaaSivu.css'
@@ -7,6 +6,7 @@ import rent from '../../services/rent'
 import Message from '../Message'
 import Select from 'react-select'
 
+/* This page is returned when making request to /varaasivu */
 const VaraaSivu = () => {
 
   const [Name, setName] = useState('')
@@ -40,73 +40,78 @@ const VaraaSivu = () => {
     setAddress(event.target.value)
   }
 
+  /* This useEffect requests data from mongo server, and parses it for the frontend to use
+   Now this function sets booked dates in setDate */
   useEffect(() => {
-
-    function getDates(startDate, endDate) {
+    const getDates = (startDate, endDate) => {
       const start = new Date(new Date(startDate).setUTCHours(0, 0, 0, 0))
       const end = new Date(new Date(endDate).setUTCHours(0, 0, 0, 0))
 
-   const date = new Date(start.getTime())
+      const date = new Date(start.getTime())
 
-   const dates = []
+      const dates = []
 
-   while (date <= end) {
-    dates.push(new Date(date))
-    date.setDate(date.getDate() + 1)
-   }
+      while (date <= end) {
+        dates.push(new Date(date))
+        date.setDate(date.getDate() + 1)
+      }
 
-   return dates
-  }
-    const data = rent.getAll()
-      .then(res => {
-        const booked = res.map(booking => [booking.startDate, booking.endDate])
-        const kaikkiPaivat = booked.map(staend => getDates(staend[0], staend[1]))
-        setBookedDates([].concat.apply([], kaikkiPaivat))
-      })
-      console.log(`valmis lista: ${bookedDates}`)
-  }, [])
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    const varausObj = {
-      name: Name,
-      number: Number,
-      address: Address,
-      email: email,
-      lisatieto: lisatieto,
-      guests: guests,
-      startDate: date[0],
-      endDate: date[1],
+      return dates
     }
 
-    rent.
-      create(varausObj)
-      .then(savedRent => {
-        setBookedDates(bookedDates.concat(savedRent))
-        setMessage('Varaus vastaanotettu!. Sähköpostissa varausvahvistus.')
-        console.log('varaus tehty')
-    setTimeout(() => {
-      setMessage(null)
-    }, 150000)
+    const data = rent.getAll()
+      .then(res => {
+        const booked = res.map(booking => [booking.startDate , booking.endDate])
+        const kaikkiPaivat = booked.map(staend => getDates(staend[0], staend[1]))
+        setBookedDates([].concat.apply([], kaikkiPaivat))
+        console.log(`valmis lista: ${bookedDates}`)
       })
-      .catch(error => {
-        console.log(error.response.data)
-        setMessage(JSON.stringify(error.response.data.error))
-      setTimeout(() => {
-        setMessage(null)
-      },10000)
-    })
 
+  }, [])
 
+  /**
+ * Handles form submit (renting the cottage)
+ *
+  */
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (window.confirm(`Haluatko varata päivät ${date[0].getDate()}.${date[0].getMonth()} - ${date[1].getDate()}.${date[0].getMonth()}`)) {
+      const varausObj = {
+        name: Name,
+        number: Number,
+        address: Address,
+        email: email,
+        lisatieto: lisatieto,
+        guests: guests,
+        startDate: date[0].setHours(4),
+        endDate: date[1].setHours(4),
+      }
+      console.log(varausObj)
+      rent.
+        create(varausObj)
+        .then(savedRent => {
+          setMessage('Varaus vastaanotettu!. Sähköpostissa varausvahvistus.')
+          setTimeout(() => {
+            setMessage(null)
+          }, 150000)
+        })
+        .catch(error => {
+          setMessage(JSON.stringify(error.response.data.error))
+          setTimeout(() => {
+            setMessage(null)
+          },10000)
+        })
+
+    }
   }
+
   const options = [
-              { value: 1, label: '1' },
-              { value: 2, label: '2' },
-              { value: 3, label: '3' },
-              { value: 4, label: '4' },
-              { value: 5, label: '5' },
-              { value: 6, label: '6' }
+    { value: 1, label: '1' },
+    { value: 2, label: '2' },
+    { value: 3, label: '3' },
+    { value: 4, label: '4' },
+    { value: 5, label: '5' },
+    { value: 6, label: '6' }
   ]
 
   return (
@@ -136,16 +141,16 @@ const VaraaSivu = () => {
           <div>
             <label> Majoittuvien henkilöiden määrä:</label>
             <Select
-            className='react-select'
-            isClearable={false}
-            name='guests'
-            id='guests'
-            options={options}
-            onChange={(choice) => setGuests(parseInt(choice.value) || console.log(choice))}>
+              className='react-select'
+              isClearable={false}
+              name='guests'
+              id='guests'
+              options={options}
+              onChange={(choice) => setGuests(parseInt(choice.value) || console.log(choice))}>
             </Select>
           </div>
           <div className='lisatieto-wrapper'>
-            <p className='lisatieto-header'>Lisätietoja:</p>
+            <p className='lisatieto-header'>Kirjoita tähän kenttään ainakin kellonaika milloin saavut, ja mahdollisesti muita lisätietoja.</p>
             <textarea
               value={lisatieto}
               className='lisatieto-kentta'
@@ -155,8 +160,8 @@ const VaraaSivu = () => {
             />
           </div>
           <div>
-        <button type='submit'>Vahvista varaus</button>
-      </div>
+            <button type='submit'>Vahvista varaus</button>
+          </div>
         </form>
       </div>
       <Message message={emessage} />

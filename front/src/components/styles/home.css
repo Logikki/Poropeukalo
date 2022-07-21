@@ -1,0 +1,30 @@
+.footer_home {
+    background-color: rgba(30, 220, 106, 0.632);
+    font-size: 13px;
+    width: 600px;
+    height: 800px;
+    border-radius: 25px;
+    background-color: rgba(30, 220, 106, 0.632);
+    padding: 0.5em;
+    padding-right: .7em;
+    padding-left: .7em;
+    margin: 0.5em;
+    
+}
+
+.perus-tiedot {
+    margin-left: 0.1em;
+    
+}
+
+li {
+    list-style: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+@media all and (max-width: 800px) {
+    .footer_home {
+
+    }
+}

@@ -5,7 +5,7 @@
     padding: 0;
     padding-bottom: 1em;
     overflow: hidden;
-    background-color: lightblue;
+    background-color: rgba(30, 220, 106, 0.632);
   }
   
   .navbarWrap {
@@ -16,4 +16,5 @@
     float: left;
     padding-left: 3em;
    text-align: center;
+   font-size: 30px;
   }
