@@ -32,7 +32,8 @@ const rentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  lisatietoja: String
+  lisatietoja: String,
+  price: Number
 })
 
 rentSchema.set('toJSON', {

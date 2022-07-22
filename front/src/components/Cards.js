@@ -1,17 +1,21 @@
-import Card from './Card'
 import './styles/cards.css'
 import FooterHome from './FooterHome'
+import Slider from './Slider'
 
 const Cards = () => {
+  /**
+   * imports images from images folder
+   * @param {regex} r
+   * @returns images as imports so they are usable
+   */
+  // const importAll =(r) => {
+  //   let images = {}
+  //   r.keys().map((item) =>  images[item.replace('./', '')] = r(item))
+  //   return images
+  // }
 
-  const importAll =(r) => {
-    let images = {}
-    r.keys().map((item) =>  images[item.replace('./', '')] = r(item))
-    return images
-  }
+  // // eslint-disable-next-line no-undef
 
-  // eslint-disable-next-line no-undef
-  const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/))
 
 
   return (
@@ -20,6 +24,13 @@ const Cards = () => {
         <h1 className="kortit__otsikko">Mökki luoston ytimessä</h1>
         <div className='cards__wrapper'>
           <FooterHome />
+          <Slider />
+          {/* <Card
+            src={images['img-20.jpeg']}
+            // text='Porot tulevat usein lähelle.'
+            label='Poroja'
+            path='/Mokki'
+          />
           <Card
             src={images['img-14.jpeg']}
             // text='Rentoudu takan äärellä'
@@ -32,7 +43,12 @@ const Cards = () => {
             label='Keittiö'
             path='/Mokki'
           />
-
+          <Card
+            src={images['img-21.jpeg']}
+            // text='Rentoudu takan äärellä'
+            label='Olohuone'
+            path='/Mokki'
+          />
 
           <Card
             src={images['img-18.jpeg']}
@@ -70,8 +86,7 @@ const Cards = () => {
             // text='Porot tulevat usein lähelle.'
             label='Poroja'
             path='/Mokki'
-          />
-
+          /> */}
         </div>
       </div>
     </div>

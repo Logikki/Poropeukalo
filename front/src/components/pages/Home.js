@@ -1,5 +1,4 @@
 import Cards from '../Cards'
-import '../styles/home.css'
 
 const Home = () => {
   return (

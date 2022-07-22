@@ -5,6 +5,7 @@ import '../styles/varaaSivu.css'
 import rent from '../../services/rent'
 import Message from '../Message'
 import Select from 'react-select'
+import Hinnoittelu from '../Hinnoittelu'
 
 /* This page is returned when making request to /varaasivu */
 const VaraaSivu = () => {
@@ -18,7 +19,7 @@ const VaraaSivu = () => {
   const [guests, setGuests] = useState(0)
   const [bookedDates, setBookedDates] = useState([])
   const [emessage, setMessage] = useState('')
-
+  const [price, setPrice] = useState(0)
 
   const handleNameChange = (event) => {
     setName(event.target.value)
@@ -64,7 +65,6 @@ const VaraaSivu = () => {
         const booked = res.map(booking => [booking.startDate , booking.endDate])
         const kaikkiPaivat = booked.map(staend => getDates(staend[0], staend[1]))
         setBookedDates([].concat.apply([], kaikkiPaivat))
-        console.log(`valmis lista: ${bookedDates}`)
       })
 
   }, [])
@@ -85,6 +85,7 @@ const VaraaSivu = () => {
         guests: guests,
         startDate: date[0].setHours(4),
         endDate: date[1].setHours(4),
+        price: price
       }
       console.log(varausObj)
       rent.
@@ -166,6 +167,7 @@ const VaraaSivu = () => {
       </div>
       <Message message={emessage} />
       <CalendarMy date={date} setDate={setDate} disabledDates={bookedDates} />
+      <Hinnoittelu date={date} price={price} setPrice={setPrice} />
     </div>
   )
 }
