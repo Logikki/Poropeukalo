@@ -6,6 +6,7 @@ import rent from '../../services/rent'
 import Message from '../Message'
 import Select from 'react-select'
 import Hinnoittelu from '../Hinnoittelu'
+import Navbar from '../Navbar'
 
 /* This page is returned when making request to /varaasivu */
 const VaraaSivu = () => {
@@ -116,58 +117,61 @@ const VaraaSivu = () => {
   ]
 
   return (
-    <div className='varaasivu'>
-      <div className='varaa_form'>
-        <form onSubmit={handleSubmit}>
-          <div>
+    <div className='vaasivu_wrap'>
+      <Navbar />
+      <div className='varaasivu'>
+        <div className='varaa_form'>
+          <form onSubmit={handleSubmit}>
+            <div>
             name: <input
-              value={Name}
-              onChange={handleNameChange}/>
-          </div>
-          <div>
+                value={Name}
+                onChange={handleNameChange}/>
+            </div>
+            <div>
             Number: <input
-              value={Number}
-              onChange={handleNumberChange}/>
-          </div>
-          <div>
+                value={Number}
+                onChange={handleNumberChange}/>
+            </div>
+            <div>
             Address: <input
-              value={Address}
-              onChange={handleAddressChange}/>
-          </div>
-          <div>
+                value={Address}
+                onChange={handleAddressChange}/>
+            </div>
+            <div>
             Email: <input
-              value={email}
-              onChange={handleEmailChange}/>
-          </div>
-          <div>
-            <label> Majoittuvien henkilöiden määrä:</label>
-            <Select
-              className='react-select'
-              isClearable={false}
-              name='guests'
-              id='guests'
-              options={options}
-              onChange={(choice) => setGuests(parseInt(choice.value) || console.log(choice))}>
-            </Select>
-          </div>
-          <div className='lisatieto-wrapper'>
-            <p className='lisatieto-header'>Kirjoita tähän kenttään ainakin kellonaika milloin saavut, ja mahdollisesti muita lisätietoja.</p>
-            <textarea
-              value={lisatieto}
-              className='lisatieto-kentta'
-              onChange={handleTietoChange}
-              rows={5}
-              cols={5}
-            />
-          </div>
-          <div>
-            <button type='submit'>Vahvista varaus</button>
-          </div>
-        </form>
+                value={email}
+                onChange={handleEmailChange}/>
+            </div>
+            <div>
+              <label> Majoittuvien henkilöiden määrä:</label>
+              <Select
+                className='react-select'
+                isClearable={false}
+                name='guests'
+                id='guests'
+                options={options}
+                onChange={(choice) => setGuests(parseInt(choice.value) || console.log(choice))}>
+              </Select>
+            </div>
+            <div className='lisatieto-wrapper'>
+              <p className='lisatieto-header'>Kirjoita tähän kenttään ainakin kellonaika milloin saavut, ja mahdollisesti muita lisätietoja.</p>
+              <textarea
+                value={lisatieto}
+                className='lisatieto-kentta'
+                onChange={handleTietoChange}
+                rows={5}
+                cols={5}
+              />
+            </div>
+            <div>
+              <button type='submit'>Vahvista varaus</button>
+            </div>
+          </form>
+        </div>
+        <Message message={emessage} />
+        <CalendarMy date={date} setDate={setDate} disabledDates={bookedDates} />
+        <Hinnoittelu date={date} price={price} setPrice={setPrice} />
       </div>
-      <Message message={emessage} />
-      <CalendarMy date={date} setDate={setDate} disabledDates={bookedDates} />
-      <Hinnoittelu date={date} price={price} setPrice={setPrice} />
     </div>
   )
 }

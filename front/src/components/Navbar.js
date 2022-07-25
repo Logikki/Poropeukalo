@@ -10,7 +10,7 @@ const navbar = () => {
           Koti
           </Link>
           <Link to='/varaasivu' className="navItem">
-            <>Varaa</>
+            <>Vuokraa</>
           </Link>
         </div>
       </div>
