@@ -41,6 +41,10 @@ rentSchema.set('toJSON', {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
+    delete returnedObject.address
+    delete returnedObject.name
+    delete returnedObject.number
+    delete returnedObject.email
   }
 })
 
