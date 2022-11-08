@@ -4,12 +4,13 @@ const rentsRouter = require('express').Router()
 const Rent = require('../models/rent')
 const nodeMailer = require('nodemailer')
 const config = require('../utils/config')
+const bcrypt = require('bcrypt')
 
 /* Function to handle post request. */ 
 rentsRouter.post('/', async (req, res) => {
   const body = req.body
   if (!body.name || !body.number || !body.guests || !body.startDate ||
-     !body.endDate || !body.email || !body.lisatieto || !body.address ) {
+     !body.endDate || !body.email || !body.lisatietoja || !body.address ) {
     return res.status(400).json({
       error: 'Aseta kaikki tiedot'
     })
@@ -23,11 +24,12 @@ rentsRouter.post('/', async (req, res) => {
       address: body.address,
       endDate: body.endDate,
       email: body.email,
-      lisatieto: body.lisatieto,
+      lisatietoja: body.lisatietoja,
       price: body.price
     })
-  
+
     const savedRent = await rentinf.save()
+    res.status(201).json(savedRent)
     /** Sending email with all the data */
     console.log(config.EMAIL)
     let transporter = nodeMailer.createTransport({
@@ -54,6 +56,7 @@ rentsRouter.post('/', async (req, res) => {
       console.log('Message %s sent: %s', info.messageId, info.response)
       res.render('index')
     })
+    
   }})
 
 /*Function handles get request. Return all the json data in the mongodb server  */ 

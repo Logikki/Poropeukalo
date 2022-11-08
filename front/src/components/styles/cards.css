@@ -69,7 +69,6 @@
   text-align: center;
 }
 
-
 li {
   list-style: none;
   padding-top: 15px;
@@ -131,6 +130,9 @@ li {
 }
 
 @media all and (max-width: 475px) {
+  .text_content {
+    padding-right: 1.5em;
+  }
   .rightArrowStyles {
     position: absolute;
       top: 50%;
@@ -153,14 +155,15 @@ li {
       cursor: pointer;
   }
   * {
-    width: auto;
+    
     border: 0;
     outline: 0;
     vertical-align: baseline;
-    margin: 0;
-  }
-  .slider_wrapper {
+    margin: 0; 
     width: auto;
+  }
+   .slider_wrapper {
+    width: 100%;
   }
   .cards__wrapper {
     display: block;
@@ -175,13 +178,14 @@ li {
   }
   .tietokentta {
     width: 375px;
-    margin: .2em;
+    margin:0;
+    padding: 0;
   }
   .mokkikuva {
     background: none;
     width: auto;
   }
   .tietokentta {
-    font-size: 13px;
+    font-size: 11px;
   }
 }

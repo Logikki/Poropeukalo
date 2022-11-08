@@ -9,5 +9,6 @@ Content-Type: application/json
     "startDate": "1 nov",
     "endDate": "2 nov",
     "email": "roni.koskinen@gmail.com",
-    "lisatieto": "asdasd"
+    "lisatietoja": "asdasd",
+    "price": "200"
     }

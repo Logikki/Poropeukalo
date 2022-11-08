@@ -16,7 +16,7 @@ const VaraaSivu = () => {
   const [Number, setNumber] = useState('')
   const [date, setDate] = useState(new Date())
   const [email, setEmail] = useState('')
-  const [lisatieto, setLisatieto] = useState('')
+  const [lisatietoja, setLisatieto] = useState('')
   const [guests, setGuests] = useState(0)
   const [bookedDates, setBookedDates] = useState([])
   const [emessage, setMessage] = useState('')
@@ -82,7 +82,7 @@ const VaraaSivu = () => {
         number: Number,
         address: Address,
         email: email,
-        lisatieto: lisatieto,
+        lisatietoja: lisatietoja,
         guests: guests,
         startDate: date[0].setHours(4),
         endDate: date[1].setHours(4),
@@ -156,7 +156,7 @@ const VaraaSivu = () => {
             <div className='lisatieto-wrapper'>
               <p className='lisatieto-header'>Kirjoita tähän kenttään ainakin kellonaika milloin saavut, ja mahdollisesti muita lisätietoja.</p>
               <textarea
-                value={lisatieto}
+                value={lisatietoja}
                 className='lisatieto-kentta'
                 onChange={handleTietoChange}
                 rows={5}
